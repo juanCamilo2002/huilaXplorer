@@ -1,17 +1,32 @@
-import { Tabs } from 'expo-router';
+import { Redirect, router, Tabs } from 'expo-router';
 import React from 'react';
 
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { useSession } from '@/providers/SessionProvider';
+import { Text } from 'react-native';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const { session, isLoading, userProfile } = useSession();
 
+  if (isLoading) {
+    return <Text>Loading...</Text>;
+  }
+
+  if (!session) {
+    return <Redirect href="/sign-in" />;
+  }
+
+  if (session && userProfile && userProfile.preferred_activities.length === 0) {
+    return <Redirect href="/preferences" />;  
+  }
+  
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].greenDark,
         headerShown: false,
       }}>
       <Tabs.Screen
