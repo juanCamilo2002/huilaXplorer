@@ -4,6 +4,7 @@ import useAxios from '@/hooks/useAxios';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { useSession } from '@/providers/SessionProvider';
 import { router, useFocusEffect } from 'expo-router';
+import { setStatusBarBackgroundColor } from 'expo-status-bar';
 import React, { useCallback, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native';
 
@@ -71,14 +72,15 @@ const PreferencesScreen = () => {
     }, [])
   );
 
+  setStatusBarBackgroundColor(Colors[colorScheme ?? 'light'].greenSoft, true);
   return (
     loading
       ? <Text>Cargando...</Text>
       : (
-        <View style={styles.container}>
+        <View style={[styles.container, {backgroundColor: Colors[colorScheme ?? "light"].greenSoft}]}>
           <Text style={[styles.title, { color: Colors[colorScheme ?? 'light'].greenDark }]}>¿Qué actividades te interesan?</Text>
           <Text style={styles.subtitle}>
-            Selecciona las actividades que más te gusten para personalizar tu experiencia.
+            Selecciona al menos 3 actividades que más te gusten para personalizar tu experiencia.
           </Text>
 
           <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -101,7 +103,7 @@ const PreferencesScreen = () => {
           </ScrollView>
 
           <View style={styles.buttonContainer}>
-            <BtnCustom title="Guardar Preferencias" onPress={savePreferences} disabled={!selectedActivities.length} />
+            <BtnCustom title="Guardar Preferencias" onPress={savePreferences} disabled={selectedActivities.length < 3} />
           </View>
         </View>
       )
@@ -113,7 +115,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#fff',
   },
   title: {
     fontSize: 24,

@@ -7,6 +7,7 @@ import Modal from '@/components/Modal';
 import useAxios from '@/hooks/useAxios';
 import {  useLocalSearchParams } from 'expo-router';
 import { useRouter } from 'expo-router';
+import { setStatusBarBackgroundColor } from 'expo-status-bar';
 
 export default function VerifyAccountScreen() {
   const { number } = useLocalSearchParams();
@@ -69,6 +70,8 @@ export default function VerifyAccountScreen() {
     setModalVisible(false);
     setErrorMessage('');
   };
+
+  setStatusBarBackgroundColor(Colors[colorScheme ?? 'light'].greenSoft, true);
 
   return (
     <View style={[styles.container, { backgroundColor: Colors[colorScheme ?? "light"].greenSoft }]}>
