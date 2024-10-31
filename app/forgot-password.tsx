@@ -10,6 +10,7 @@ import { Colors } from '@/constants/Colors';
 import useAxios from '@/hooks/useAxios';
 import Modal from '@/components/Modal';
 import { router } from 'expo-router';
+import { setStatusBarBackgroundColor } from 'expo-status-bar';
 
 interface SendForgotPasswordCodeFormData {
   phone_number: string;
@@ -55,6 +56,7 @@ export default function ForgotPasswordScreen() {
     setErrorMessage('');
   }
 
+  setStatusBarBackgroundColor(Colors[colorScheme ?? 'light'].greenSoft, true);
   return (
     <View style={[styles.container, { backgroundColor: Colors[colorScheme ?? "light"].greenSoft }]}>
       <Text style={[styles.title, { color: Colors[colorScheme ?? 'light'].greenDark }]}>

@@ -10,6 +10,7 @@ import BtnCustom from '@/components/BtnCustom';
 import useAxios from '@/hooks/useAxios';
 import { router, useLocalSearchParams } from 'expo-router';
 import Modal from '@/components/Modal';
+import { setStatusBarBackgroundColor } from 'expo-status-bar';
 
 interface ResetPasswordFormData {
   new_password: string;
@@ -74,6 +75,8 @@ export default function ResetPassword() {
     setModalVisible(false);
     setErrorMessage('');
   }
+
+  setStatusBarBackgroundColor(Colors[colorScheme ?? 'light'].greenSoft, true);
 
   return (
     <View style={[styles.container, { backgroundColor: Colors[colorScheme ?? "light"].greenSoft }]}>

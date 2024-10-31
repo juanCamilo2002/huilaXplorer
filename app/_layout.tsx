@@ -31,7 +31,7 @@ export default function RootLayout() {
     return null;
   }
 
-  setStatusBarBackgroundColor(colorScheme === 'dark' ? DarkTheme.colors.background : DefaultTheme.colors.background, true);
+ 
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>

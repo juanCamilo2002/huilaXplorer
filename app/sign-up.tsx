@@ -13,6 +13,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { CheckBox } from '@rneui/base';
 import useAxios from '@/hooks/useAxios';
+import { setStatusBarBackgroundColor } from 'expo-status-bar';
 
 const signUpSchema = Yup.object().shape({
   email: Yup.string().email('Introduce un email válido').required('El email es obligatorio'),
@@ -72,6 +73,8 @@ export default function SignUp() {
       
     }
   }
+
+  setStatusBarBackgroundColor(Colors[colorScheme ?? 'light'].greenSoft, true);
 
   return (
     <ScrollView>

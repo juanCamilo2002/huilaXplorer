@@ -12,6 +12,7 @@ import Divider from '@/components/Divider';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import Modal from '@/components/Modal';
+import { setStatusBarBackgroundColor } from 'expo-status-bar';
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email('Introduce un email válido').required('El email es obligatorio'),
@@ -66,6 +67,7 @@ export default function SignIn() {
     setModalVisible(false);
   };
 
+  setStatusBarBackgroundColor(Colors[colorScheme ?? 'light'].greenSoft, true);
 
   return (
     <View style={[styles.container, { backgroundColor: Colors[colorScheme ?? "light"].greenSoft }]}>
@@ -125,7 +127,6 @@ export default function SignIn() {
         closeModal={closeModal}
         errorMessage={errorMessage}
       />
-
       
     </View>
   );

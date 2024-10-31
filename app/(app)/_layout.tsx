@@ -1,13 +1,12 @@
-import { Redirect, router, Tabs } from 'expo-router';
-import React from 'react';
-
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
+import { View, Text } from 'react-native'
+import React from 'react'
+import { Redirect, Stack } from 'expo-router'
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { setStatusBarBackgroundColor, setStatusBarStyle } from 'expo-status-bar';
+import { Colors } from '@/constants/Colors';
 import { useSession } from '@/providers/SessionProvider';
-import { Text } from 'react-native';
 
-export default function TabLayout() {
+export default function AppLayout() {
   const colorScheme = useColorScheme();
   const { session, isLoading, userProfile } = useSession();
 
@@ -20,33 +19,18 @@ export default function TabLayout() {
   }
 
   if (session && userProfile && userProfile.preferred_activities.length === 0) {
-    return <Redirect href="/preferences" />;  
+    return <Redirect href="/preferences" />;
   }
-  
+
+  setStatusBarBackgroundColor(Colors[colorScheme ?? 'light'].white, true);
+  setStatusBarStyle("dark");
+
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].greenDark,
-        headerShown: false,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
-        }}
-      />
-    </Tabs>
-  );
+    <Stack
+      screenOptions={{ headerShown: false }}
+    > 
+      <Stack.Screen name='place-details/[id]'/>
+      <Stack.Screen name='(drawer)' />
+    </Stack>
+  )
 }

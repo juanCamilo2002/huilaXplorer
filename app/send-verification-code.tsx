@@ -12,6 +12,7 @@ import { Text } from '@rneui/base';
 import useAxios from '@/hooks/useAxios';
 import Modal from '@/components/Modal';
 import { useRouter } from 'expo-router';
+import { setStatusBarBackgroundColor } from 'expo-status-bar';
 
 const sendVerificationCodeSchema = Yup.object().shape({
   phone_number: Yup
@@ -56,6 +57,8 @@ export default function SendVerificationCodeScreen() {
     setModalVisible(false);
     setErrorMessage('');
   }
+
+  setStatusBarBackgroundColor(Colors[colorScheme ?? 'light'].greenSoft, true);
   return (
     <View style={[styles.container, { backgroundColor: Colors[colorScheme ?? "light"].greenSoft }]}>
       <Text style={[styles.title, { color: Colors[colorScheme ?? 'light'].greenDark }]}>
