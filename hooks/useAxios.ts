@@ -31,7 +31,7 @@ const useAxios = () => {
     return () => {
       axiosInstance.interceptors.request.eject(requestInterceptor);
     };
-  }, [session, axiosInstance]);
+  }, [session, axiosInstance, isLoading]);
 
   
   const get = useCallback(async (url: string, config?: AxiosRequestConfig) => {
@@ -70,7 +70,16 @@ const useAxios = () => {
     }
   }, [axiosInstance]);
 
-  return { get, post, put, patch };
+  const remove = useCallback(async (url: string, config?: AxiosRequestConfig) => {
+    try {
+      const response: AxiosResponse = await axiosInstance.delete(url,config);
+      return { data: response.data, status: response.status };
+    } catch (error: any) {
+      throw error;
+    }
+  }, [axiosInstance]);
+
+  return { get, post, put, patch, remove };
 };
 
 export default useAxios;
