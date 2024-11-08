@@ -14,7 +14,7 @@ export type SpotsData = {
     activities: Activity[];
 }
 
-type SpotImageData = {
+export type SpotImageData = {
     image: string;
 }
 

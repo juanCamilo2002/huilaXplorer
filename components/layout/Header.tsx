@@ -31,19 +31,20 @@ export default function Header() {
   const colorScheme = useColorScheme();
   const image = userProfile?.img_profile
     ? { uri: userProfile?.img_profile }
-    : require('../../assets/images/avatar.jpg');
+    : require('@/assets/images/avatar.jpg');
 
   return (
     <View style={[styles.container, {
       backgroundColor: Colors[colorScheme ?? "light"].white,
       borderBottomColor: Colors[colorScheme ?? 'light'].greenLight
     }]}>
-      <View>
+      {/* <View>
         <ButtonHeader icon="menu" onPress={() => navigation.toggleDrawer()} />
-      </View>
+      </View> */}
+      <Text style={styles.txtLogo}>HuilaXplorer</Text>
       <View style={styles.right}>
-        <ButtonHeader icon="notifications-outline" onPress={() => { }} />
-        <Badge value="3" status="success" containerStyle={{ position: 'absolute', top: 5, left: 25 }} />
+        {/* <ButtonHeader icon="notifications-outline" onPress={() => { }} />
+        <Badge value="3" status="success" containerStyle={{ position: 'absolute', top: 5, left: 25 }} /> */}
         <Image
           source={image}
           style={styles.img}
@@ -84,5 +85,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
+  },
+  txtLogo: {
+    fontSize: 20,
+    fontWeight: 'bold',
   }
 });
