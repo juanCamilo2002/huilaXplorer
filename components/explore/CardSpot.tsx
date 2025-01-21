@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import React, { useMemo, useState } from 'react';
 import { Image } from 'expo-image';
 import { Card } from '@rneui/base';
@@ -56,7 +56,7 @@ export default function CardSpot({ spot }: CardSpotProps) {
             style={{ width: 'auto', height: 200 }}
             contentFit='cover'
           />
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => setAddFav(prev => !prev)}
             style={[styles.iconContainer, { backgroundColor: Colors[colorScheme ?? 'light'].white }]}>
             <Ionicons
@@ -64,7 +64,7 @@ export default function CardSpot({ spot }: CardSpotProps) {
               size={25}
               color={Colors[colorScheme ?? 'light'].greenDark}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <View style={styles.body}>
           <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">

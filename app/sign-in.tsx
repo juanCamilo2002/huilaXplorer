@@ -73,7 +73,7 @@ export default function SignIn() {
     <View style={[styles.container, { backgroundColor: Colors[colorScheme ?? "light"].greenSoft }]}>
       <Text style={[styles.title, { color: Colors[colorScheme ?? "light"].greenDark }]}>Iniciar sesión</Text>
 
-      <View style={styles.containerProviders}>
+      {/* <View style={styles.containerProviders}>
         <LoginBtnProvider
           onPress={() => { alert('google') }}
           image="https://www.svgrepo.com/show/303108/google-icon-logo.svg"
@@ -82,9 +82,9 @@ export default function SignIn() {
           onPress={() => { alert('facebook') }}
           image="https://www.svgrepo.com/show/448224/facebook.svg"
         />
-      </View>
+      </View> */}
 
-      <Divider />
+      {/* <Divider /> */}
 
       <InputsField
         control={control}

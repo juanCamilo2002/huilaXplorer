@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Activity, SpotsData } from '@/constants/SpotsType';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import AddSpotToRouteModal from './AddSpotToRouteModal';
 
 type ActivitiesAboutProps = {
   activities: Activity[];
@@ -38,14 +39,25 @@ export default function SpotAbout({ spot }: SpotAboutProps) {
       ? `${spot.description.slice(0, MAX_LENGTH)}...`
       : spot.description;
 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const closeModal = () => {
+    setIsModalVisible(false);
+  }
+
   return (
     <View style={styles.container}>
       <ActivitiesAbout activities={spot.activities} />
       <View style={styles.details}>
         <Text style={styles.name}>{spot.name}</Text>
-        <View style={styles.locate}>
-          <Ionicons name="locate" size={20} color="black" />
-          <Text style={[styles.locateName, { color: Colors[colorScheme ?? "light"].gray }]}>{spot.location.name}</Text>
+        <View style={{flexDirection: "row", justifyContent: "space-between"}}>
+          <View style={styles.locate}>
+            <Ionicons name="locate" size={20} color="black" />
+            <Text style={[styles.locateName, { color: Colors[colorScheme ?? "light"].gray }]}>{spot.location.name}</Text>
+          </View>
+          <TouchableOpacity onPress={() => setIsModalVisible(true)}>
+            <Ionicons name='add' size={20} color="black" />
+          </TouchableOpacity>
         </View>
         <View style={styles.descContainer}>
           <Text style={[styles.descTitle, { color: Colors[colorScheme ?? "light"].gray }]}>Acerca de</Text>
@@ -57,6 +69,7 @@ export default function SpotAbout({ spot }: SpotAboutProps) {
           )}
         </View>
       </View>
+      <AddSpotToRouteModal isVisible={isModalVisible} onBackdropPress={closeModal} soptId={spot.id}/>
     </View>
   );
 }

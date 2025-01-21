@@ -61,8 +61,8 @@ export default function SignUp() {
 
   const onSubmit = async (formData: SignUpFormData) => {
     try {
-      const {data, status} = await post('users/accounts/', formData);
-      if (status === 201 ) {
+      const { data, status } = await post('users/accounts/', formData);
+      if (status === 201) {
         router.push({
           pathname: '/verify-account/[number]',
           params: { number: data.phone_number }
@@ -70,7 +70,7 @@ export default function SignUp() {
       }
     } catch (error: any) {
       console.error(error);
-      
+
     }
   }
 
@@ -79,8 +79,9 @@ export default function SignUp() {
   return (
     <ScrollView>
       <View style={[styles.container, { backgroundColor: Colors[colorScheme ?? "light"].greenSoft }]}>
+        <View style={{ height: 125 }} />
         <Text style={[styles.title, { color: Colors[colorScheme ?? "light"].greenDark }]}>Crear Cuenta</Text>
-
+        {/* 
         <View style={styles.containerProviders}>
           <LoginBtnProvider
             onPress={() => { alert('google') }}
@@ -90,9 +91,9 @@ export default function SignUp() {
             onPress={() => { alert('facebook') }}
             image="https://www.svgrepo.com/show/448224/facebook.svg"
           />
-        </View>
+        </View> */}
 
-        <Divider />
+        {/* <Divider /> */}
         <InputsField
           control={control}
           name="email"
